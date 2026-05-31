@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --spacing: 8px;
+    --fontclr: #000;
+}
+
+
+.homepage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 80vh;
+}
+
+.homeprompt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 80vw;
+    margin: var(--spacing);
+
+    color: var(--fontclr);
+    text-decoration: none;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.select {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+
+    width: 80vw;
+}
+
+.select a {
+
+    color: var(--fontclr);
+    text-decoration: none;
+    font-weight: 600;
+
+
+}
