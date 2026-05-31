@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-    --spacing: 8px;
-    --fontclr: #000;
+    --spacing: 16px;
 }
 
 
@@ -13,7 +12,7 @@
     align-items: center;
 
     width: 100vw;
-    height: 80vh;
+    height: 92vh;
 }
 
 .homeprompt {
@@ -22,7 +21,7 @@
     justify-content: center;
 
     width: 80vw;
-    margin: var(--spacing);
+    margin-bottom: var(--spacing);
 
     color: var(--fontclr);
     text-decoration: none;
@@ -41,10 +40,7 @@
 }
 
 .select a {
-
     color: var(--fontclr);
     text-decoration: none;
     font-weight: 600;
-
-
 }

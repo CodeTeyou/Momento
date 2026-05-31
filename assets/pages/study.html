@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../assets/styles/navbar.css">
     <link rel="shortcut icon" href="../../assets/images/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../assets/styles/study.css">
     <title>Thinksy</title>
 </head>
 <body>
@@ -23,6 +24,21 @@
         </div>
 
     </nav>
+
+    <div class="studypage">
+        <div class="timerbox">
+            <div class="spinners">
+                <button id="spinnerup">⮝</button>
+                <button id="spinnerdown">⮟</button>
+            </div>
+            <input type="number" id="timerinput" max="60" min="0" step="5" readonly>
+            <span id="timer">:00</span>
+        </div>
+
+        <textarea id="keynotes"></textarea>
+    </div>
+
+
 
 </body>
 </html>
