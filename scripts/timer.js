@@ -56,24 +56,7 @@ spinnerDown.addEventListener("click", () => {
 })
 
 let timerOn;
-let timeStopped;
-
-function tickTimer(timeNow) {
-    if (timerOn) {
-        let minutes = (Math.floor(timeNow / 60));
-        let seconds = (timeNow % 60);
-
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-        if (seconds < 10) {
-            seconds = "0" + seconds;
-        }
-
-        timer.innerText = String(minutes + " : " + seconds);
-        timeStopped = String(minutes + " : " + seconds);
-    }
-}
+let time;
 
 startButton.addEventListener("click", () => {
     if (timerOn) {
@@ -90,24 +73,13 @@ startButton.addEventListener("click", () => {
 
         timer.innerText = (timerInput.value + " : " + "00");
 
-        let timerLength = timerInput.value * 60;
+        
 
-
-        for (let i = timerLength; i >= 0; i--) {
-            let time = timerLength - i;
-            if (timeStopped) {
-                time = timeStopped
-            }
-            setTimeout(() => {
-                tickTimer(time);
-            }, (i * 1000));
-        }
     }
 })
 
 stopButton.addEventListener("click", () => {
-    timerOn = '';
-    timeStopped = '';
+    timerOn = false;
 
     startButton.innerText = "Start";
     startButton.style.display = "none";
