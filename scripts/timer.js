@@ -4,7 +4,8 @@ let spinnerDown = document.getElementById('spinnerdown');
 let timerInput = document.getElementById('timerinput');
 let timer = document.getElementById('timer');
 let startButton = document.getElementById('start');
-let stopButton = document.getElementById('stop')
+let stopButton = document.getElementById('stop');
+const buzzerSound = new Audio('../../assets/audios/buzzer.mp3');
 
 timerInput.value = "00";
 startButton.style.display = "none"
@@ -55,14 +56,52 @@ spinnerDown.addEventListener("click", () => {
     timerInput.value = newValue;
 })
 
-let timerOn;
 let time;
+let timerCount;
+
+function startTimer() {
+    clearInterval(timerCount);
+    timerCount = setInterval(() => {
+
+        let minute = Math.floor(time / 60);
+        let second = (time % 60);
+
+        if (minute < 10) {
+            minute = String("0" + minute);
+        }
+
+        if (second < 10) {
+            second = String("0" + second);
+        }
+
+        timer.innerText = String(minute + " : " + second);
+
+        if ((time - 1) < 0) {
+            startButton.innerText = "Start"
+            startButton.style.display = "none"
+            stopButton.innerText = "Exit"
+            stopButton.style.display = "inline"
+            buzzerSound.play()
+            startButton.innerText
+            clearInterval(timerCount);
+            return;
+        }
+
+        time--;
+    }, 1000)    
+}
+
+
+
+let timerOn = false;
 
 startButton.addEventListener("click", () => {
     if (timerOn) {
         timerOn = false;
         stopButton.style.display = "block"
         startButton.innerText = "Resume";
+        clearInterval(timerCount);
+
     } else {
         timerOn = true;
         spinnerContainer.style.display = "none";
@@ -70,16 +109,19 @@ startButton.addEventListener("click", () => {
         startButton.innerText = "Pause";
         timerInput.style.display = "none";
 
+        if (!time) {
+            time = (Number(timerInput.value) * 60);
+            timer.innerText = (timerInput.value + " : " + "00");
+        }
 
-        timer.innerText = (timerInput.value + " : " + "00");
-
+        startTimer();
         
-
     }
 })
 
 stopButton.addEventListener("click", () => {
     timerOn = false;
+    time = null;
 
     startButton.innerText = "Start";
     startButton.style.display = "none";
@@ -88,4 +130,7 @@ stopButton.addEventListener("click", () => {
     timerInput.value = "00";
     timerInput.style.display = "inline";
     timer.innerText = ":00";
+
+    clearInterval(timerCount);
+    timerCount = null;
 })
