@@ -5,6 +5,8 @@ let timerInput = document.getElementById('timerinput');
 let timer = document.getElementById('timer');
 let startButton = document.getElementById('start');
 let stopButton = document.getElementById('stop');
+let goal = document.getElementById('goal');
+let goalInput = document.getElementById('goalinput');
 const buzzerSound = new Audio('../../assets/audios/buzzer.mp3');
 
 timerInput.value = "00";
@@ -83,6 +85,7 @@ function startTimer() {
             stopButton.style.display = "inline";
             timer.style.color = "var(--urgent)";
             timerInput.style.color = "var(--urgent)";
+            goal.style.color = "var(--urgent)";
             buzzerSound.play();
             clearInterval(timerCount);
             return;
@@ -113,6 +116,15 @@ startButton.addEventListener("click", () => {
         if (!time) {
             time = (Number(timerInput.value) * 60);
             timer.innerText = (timerInput.value + " : " + "00");
+
+            if (!goalInput.value == "") {
+                goalInput.style.display = "none";
+                goal.innerText = (goalInput.value);                
+            } else {
+                goalInput.style.display = "none"
+                goal.style.display = "none"
+            }
+
         }
 
         startTimer();
@@ -140,6 +152,12 @@ stopButton.addEventListener("click", () => {
     timerInput.style.color = "var(--studyfontclr)";
     timerInput.value = "00";
     timerInput.style.display = "inline";
+
+    goal.style.display = "inline";
+    goal.innerText = "Goal: ";
+    goal.style.color = "var(--studyfontclr)";
+
+    goalInput.style.display = "inline";
 
     clearInterval(timerCount);
     timerCount = null;
