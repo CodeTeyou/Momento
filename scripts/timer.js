@@ -5,7 +5,7 @@ let timerInput = document.getElementById('timerinput');
 let timer = document.getElementById('timer');
 let startButton = document.getElementById('start');
 let stopButton = document.getElementById('stop');
-const buzzerSound = new Audio('../../assets/audios/buzzer.mp3');
+const buzzerSound = new Audio('../../assets/audio/buzzer.mp3');
 
 let time;
 let timerCount;
