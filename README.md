@@ -9,6 +9,3 @@ Welcome to THINKLEY!
 
 Personal Project
 Made for Study
-
-Sources:
-https://www.flaticon.com/free-icons/university
