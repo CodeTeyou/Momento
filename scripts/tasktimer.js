@@ -7,7 +7,11 @@ let startButton = document.getElementById('start');
 let stopButton = document.getElementById('stop');
 let goal = document.getElementById('goal');
 let goalInput = document.getElementById('goalinput');
+
 const buzzerSound = new Audio('../../assets/audio/buzzer.mp3');
+const adjustSound = new Audio('../../assets/audio/adjust.mp3');
+const startSound = new Audio('../../assets/audio/timerstarted.mp3');
+const denySound = new Audio('../../assets/audio/deny.mp3');
 
 let time;
 let timerCount;
@@ -62,6 +66,9 @@ spinnerUp.addEventListener("click", () => {
     newValue = currentValue + 5;
 
     if (newValue > 60) {
+        denySound.pause();
+        denySound.currentTime = 0;
+        denySound.play();
         return;
     }
 
@@ -76,6 +83,9 @@ spinnerUp.addEventListener("click", () => {
     }
 
     timerInput.value = newValue;
+    adjustSound.pause()
+    adjustSound.currentTime = 0;
+    adjustSound.play()
 })
 
 spinnerDown.addEventListener("click", () => {
@@ -85,6 +95,9 @@ spinnerDown.addEventListener("click", () => {
     newValue = currentValue - 5;
 
     if (newValue < 0) {
+        denySound.pause();
+        denySound.currentTime = 0;
+        denySound.play();
         return;
     }
 
@@ -99,6 +112,9 @@ spinnerDown.addEventListener("click", () => {
     }
 
     timerInput.value = newValue;
+    adjustSound.pause()
+    adjustSound.currentTime = 0;
+    adjustSound.play()
 })
 
 function startTimer() {
@@ -164,6 +180,7 @@ startButton.addEventListener("click", () => {
             } else {
                 goalInput.style.display = "none"
                 goal.style.display = "none"
+                startSound.play()
             }
 
         }

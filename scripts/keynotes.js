@@ -6,9 +6,8 @@ let keyNote = document.getElementById("keynotes");
 
 window.addEventListener("load", () => {
     let savedContent = localStorage.getItem("lastNote");
-    
-
     keyNote.value = savedContent;
+
 })
 
 window.addEventListener("beforeunload", () => {
@@ -22,7 +21,8 @@ datarequest.onupgradeneeded = (event) => {
     database = event.target.result;
 
     database.createObjectStore("notesList", {
-        keyPath: "id"
+        keyPath: "id",
+        autoIncrement: true
     });
 }
 
@@ -31,11 +31,26 @@ datarequest.onsuccess = (event) => {
 }
 
 datarequest.onerror = (event) => {
-    console.warn(event);
+    console.error(event.target.error);
 }
 
-save.addEventListener("click", (clicks) => {
+save.addEventListener("click", () => {
     const transaction = database.transaction(["notesList"], "readwrite");
     const store = transaction.objectStore("notesList");
-    store.add()
+
+    const getSaved = store.getAll();
+
+    const name = noteNameInput.value;
+    const notes = keyNote.value;
+
+    getSaved.onsuccess = () => {
+        console.log(getSaved.result);
+    }
+
+
+    // const addRequest = store.add(
+    //     {
+    //         name: "+",
+    //         notes: ""
+    //     });
 });
