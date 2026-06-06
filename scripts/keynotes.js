@@ -1,16 +1,20 @@
 let noteOptions = document.getElementById("savednotes");
-let addOption = document.getElementById("add");
 let noteNameInput = document.getElementById("notename");
 let save = document.getElementById("save");
 let keyNote = document.getElementById("keynotes");
 
+ let savedName;
+
 window.addEventListener("load", () => {
   let savedContent = localStorage.getItem("lastNote");
+  savedName = localStorage.getItem("lastName");
   keyNote.value = savedContent;
+  noteNameInput.value = savedName;
 });
 
 window.addEventListener("beforeunload", () => {
   localStorage.setItem("lastNote", keyNote.value);
+  localStorage.setItem("lastName",noteNameInput.value);
 });
 
 const datarequest = indexedDB.open("KeyNotes");
@@ -32,9 +36,16 @@ datarequest.onsuccess = (event) => {
   const store = transaction.objectStore("notesList");
   const list = store.getAll();
 
-  list.onsuccess = (occur) => {
-    for (let i = 0; i < list.result.length; i++) {
-      let newOption; //add new option here
+  list.onsuccess = () => {
+    if (list.result.length < 1) {
+      noteOptions.style.display = "none";
+      return;
+    } else {
+      for (let i = 0; i < list.result.length; i++) {
+        let option = new Option(list.result[i].name, list.result[i].id)
+        noteOptions.appendChild(option)
+        if (list.result[i].name = savedName) {noteOptions.value = option.value;}
+      }
     }
   }
 };
@@ -49,14 +60,14 @@ save.addEventListener("click", () => {
 
   const getSaved = store.getAll();
 
-  const nameInsert = String(noteNameInput.value);
+  const nameInsert = noteNameInput.value;
   const noteInsert = keyNote.value;
 
   getSaved.onsuccess = () => {
     const previousId = getSaved.result.find((saved) => saved.name === nameInsert);
 
     if (nameInsert == "") {
-        console.warn("EMPTY NAME")
+        console.warn("EMPTY")
         return;}
 
     if (previousId) {
@@ -67,7 +78,27 @@ save.addEventListener("click", () => {
           name: nameInsert,
           notes: noteInsert
         });
+        addRequest.onsuccess = () => {
+        const newOption = new Option(nameInsert, addRequest.result);
+        noteOptions.appendChild(newOption);
+        noteOptions.value = newOption.value;
+        noteOptions.style.display = "inline";
+        }
     }
 
   };
 });
+
+noteOptions.onchange = () => {
+  const transaction = database.transaction(["notesList"], "readwrite");
+  const store = transaction.objectStore("notesList");
+  const newValue = Number(noteOptions.value);
+
+  const getSaved = store.get(Number(newValue));
+
+  getSaved.onsuccess = () => {
+    const getNote = getSaved.result;
+    noteNameInput.value = getNote.name;
+    keyNote.value = getNote.notes;
+  }
+}
