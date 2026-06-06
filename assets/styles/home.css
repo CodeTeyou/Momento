@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-:root {
-    --spacing: 16px;
-}
-
 
 .homepage {
     display: flex;
@@ -21,7 +17,7 @@
     justify-content: center;
 
     width: 80vw;
-    margin-bottom: var(--spacing);
+    margin-bottom: 32px;
 
     color: var(--fontclr);
     text-decoration: none;
@@ -36,7 +32,7 @@
     align-content: center;
     align-items: center;
 
-    width: 80vw;
+    width: 40vw;
 }
 
 .select a {
