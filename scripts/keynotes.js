@@ -27,6 +27,16 @@ datarequest.onupgradeneeded = (event) => {
 
 datarequest.onsuccess = (event) => {
   database = event.target.result;
+
+  const transaction = database.transaction(["notesList"], "readwrite");
+  const store = transaction.objectStore("notesList");
+  const list = store.getAll();
+
+  list.onsuccess = (occur) => {
+    for (let i = 0; i < list.result.length; i++) {
+      let newOption; //add new option here
+    }
+  }
 };
 
 datarequest.onerror = (event) => {
@@ -50,15 +60,13 @@ save.addEventListener("click", () => {
         return;}
 
     if (previousId) {
-        previousId.notes = noteInsert
-
-        console.log(previousId)
+        previousId.notes = noteInsert;
+        store.put(previousId);
     } else {
         const addRequest = store.add({
-                name: nameInsert,
-                notes: noteInsert});
-                
-        console.log(addRequest)
+          name: nameInsert,
+          notes: noteInsert
+        });
     }
 
   };
