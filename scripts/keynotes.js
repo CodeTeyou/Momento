@@ -44,7 +44,7 @@ datarequest.onsuccess = (event) => {
       for (let i = 0; i < list.result.length; i++) {
         let option = new Option(list.result[i].name, list.result[i].id)
         noteOptions.appendChild(option)
-        if (list.result[i].name = savedName) {noteOptions.value = option.value;}
+        if (list.result[i].name == savedName) {noteOptions.value = option.value;}
       }
     }
   }
@@ -90,7 +90,7 @@ save.addEventListener("click", () => {
 });
 
 noteOptions.onchange = () => {
-  const transaction = database.transaction(["notesList"], "readwrite");
+  const transaction = database.transaction(["notesList"], "readonly");
   const store = transaction.objectStore("notesList");
   const newValue = Number(noteOptions.value);
 
