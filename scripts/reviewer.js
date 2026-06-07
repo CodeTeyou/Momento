@@ -1,7 +1,7 @@
 let noteSelector = document.getElementById("noteSelect");
 let noteBox = document.getElementById("noteBox");
 
-let listCache = []; // stores IndexedDB results
+let listCache = [];
 
 // Render Note Buttons
 function createOption(noteContent, noteParent, noteId) {
@@ -43,7 +43,7 @@ noteSelector.addEventListener("click", (e) => {
 });
 
 
-// IndexedDB Setup
+// IndexedDB
 const datarequest = indexedDB.open("KeyNotes");
 let database;
 
@@ -56,8 +56,6 @@ datarequest.onupgradeneeded = (event) => {
     });
 };
 
-
-// Load data
 datarequest.onsuccess = (event) => {
     database = event.target.result;
 
