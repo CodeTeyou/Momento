@@ -173,6 +173,8 @@ startButton.addEventListener("click", () => {
             time = (Number(timerInput.value) * 60);
             timer.innerText = (timerInput.value + " : " + "00");
 
+            startSound.play()
+
             if (!goalInput.value == "") {
                 goalInput.style.display = "none";
                 goal.innerText = (goalInput.value);

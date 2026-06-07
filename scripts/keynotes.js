@@ -5,6 +5,8 @@ let keyNote = document.getElementById("keynotes");
 
  let savedName;
 
+// Crash Result
+
 window.addEventListener("load", () => {
   let savedContent = localStorage.getItem("lastNote");
   savedName = localStorage.getItem("lastName");
@@ -16,6 +18,8 @@ window.addEventListener("beforeunload", () => {
   localStorage.setItem("lastNote", keyNote.value);
   localStorage.setItem("lastName",noteNameInput.value);
 });
+
+// IndexedDB
 
 const datarequest = indexedDB.open("KeyNotes");
 let database;
@@ -32,7 +36,7 @@ datarequest.onupgradeneeded = (event) => {
 datarequest.onsuccess = (event) => {
   database = event.target.result;
 
-  const transaction = database.transaction(["notesList"], "readwrite");
+  const transaction = database.transaction(["notesList"], "readonly");
   const store = transaction.objectStore("notesList");
   const list = store.getAll();
 

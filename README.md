@@ -5,7 +5,13 @@ ___________.__    .__        __
   |____|   |___|  /__|___|  /__|_ \/____  >/ ____|
                 \/        \/     \/     \/ \/     
 
-Welcome to THINKLEY!
+Welcome to THINKSY!
 
 Personal Project
 Made for Study
+
+Resources:
+
+(Audios)
+
+(Images)
