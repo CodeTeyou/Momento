@@ -1,6 +1,9 @@
 let noteSelector = document.getElementById("noteSelect");
 let noteBox = document.getElementById("noteBox");
 
+const datarequest = indexedDB.open("KeyNotes");
+let database;
+
 let listCache = [];
 
 // Render Note Buttons
@@ -17,36 +20,72 @@ function createOption(noteContent, noteParent, noteId) {
         console.error("No Id");
         return;
     }
-
+    let optionContainer = document.createElement("div");
     let newNoteOption = document.createElement("button");
+    let deleteOption = document.createElement("button")
+    
+    optionContainer.className = "noteSelector";
+    
     newNoteOption.textContent = String(noteContent);
     newNoteOption.className = "noteOption";
-
-    // store real ID safely
     newNoteOption.dataset.id = noteId;
+    
+    deleteOption.innerHTML = "<span class='material-symbols-outlined'> delete </span>";
+    deleteOption.className = "noteDelete"
+    deleteOption.dataset.id = noteId;
 
-    noteParent.appendChild(newNoteOption);
+    noteParent.appendChild(optionContainer);
+    optionContainer.appendChild(newNoteOption);
+    optionContainer.appendChild(deleteOption);
+}
+
+// Render Options
+function loadButtons(store) {
+    listCache = store;
+
+    noteSelector.innerHTML = ""
+
+    if (listCache.length < 1) {
+        let warnMessage = document.createElement("span");
+        warnMessage.style.color = "var(--urgent)"
+        warnMessage.textContent = "You Have No Notes, Study To Make Some!";
+        noteSelector.appendChild(warnMessage);
+        noteBox.style.display = "none";
+        return;
+    }
+
+    listCache.forEach((element) => {
+        createOption(element.name, noteSelector, element.id);
+    });
 }
 
 
 // Event Delegation
 noteSelector.addEventListener("click", (e) => {
-    if (!e.target.classList.contains("noteOption")) return;
+    const textOption = e.target.closest(".noteOption");
+    if (textOption) {
+        const matchingObject = listCache.find(e => String(e.id) === textOption.dataset.id);
+        noteBox.value = matchingObject.notes;
+    }
 
-    const id = Number(e.target.dataset.id);
+    const deleteOption = e.target.closest(".noteDelete");
+    if (deleteOption) {
+        const removeId = Number(deleteOption.dataset.id);
 
-    const note = listCache.find(n => n.id === id);
+        const transaction = database.transaction(["notesList"], "readwrite");
+        const store = transaction.objectStore("notesList");
+        const list = store.getAll()
+        
+        const removeRequest = store.delete(removeId);
 
-    if (note) {
-        noteBox.textContent = note.notes;
+        removeRequest.onsuccess = () => {
+            loadButtons(list.result);
+        }
     }
 });
 
 
 // IndexedDB
-const datarequest = indexedDB.open("KeyNotes");
-let database;
-
 datarequest.onupgradeneeded = (event) => {
     database = event.target.result;
 
@@ -64,17 +103,6 @@ datarequest.onsuccess = (event) => {
     const list = store.getAll();
 
     list.onsuccess = () => {
-        listCache = list.result;
-
-        if (listCache.length < 1) {
-            let warnMessage = document.createElement("span");
-            warnMessage.textContent = "You Have No Notes, Study To Make Some!";
-            noteSelector.appendChild(warnMessage);
-            return;
-        }
-
-        listCache.forEach((element) => {
-            createOption(element.name, noteSelector, element.id);
-        });
+        loadButtons(list.result);
     };
 };
