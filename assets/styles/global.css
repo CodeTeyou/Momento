@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jersey+10&display=swap");
+
+:root {
+    /* Formatting */
+  --spacing: 8px;
+  --trans: all 0.2s ease-in-out;
+
+  /* Colors */
+  --clr: white;
+  --fontclr: #000;
+  --theme: pink;
+  --studyclr: black;
+  --studyfontclr: white;
+  --urgent: red;
+
+  /* Fonts */
+  --fontmid: 20px;
+  --fontlrg: 32px;
+  --fontdisplay: 40px;
+  --fontsize: 16px;
+}

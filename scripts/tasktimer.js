@@ -51,9 +51,12 @@ window.addEventListener("load", () => {
     startTimer();
   }
 
-  if (previousGoal || previousGoal == "") {
+  if (previousGoal) {
     goalInput.style.display = "none";
     goal.innerText = previousGoal;
+  } else if (!previousGoal || previousGoal == "") {
+    goalInput.style.display = "none";
+    goal.innerText = ""
   }
 });
 

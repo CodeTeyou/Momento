@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../assets/styles/navbar.css" />
+    <link rel="stylesheet" href="../../assets/styles/global.css" />
     <link
       rel="shortcut icon"
       href="../../assets/images/logo.ico"
@@ -31,10 +32,13 @@
     </nav>
     <main class="reviewerPage">
       <div class="noteRender">
-        <div id="noteSelect"></div>
+        <nav id="noteSelect"></nav>
         <textarea id="noteBox" readonly></textarea>
       </div>
-      <div textEditor></div>
+      <div class="textEditor">
+        <div class="editorSettings"></div>
+        <div id="documentWriter"></div>
+      </div>
     </main>
   </body>
 
