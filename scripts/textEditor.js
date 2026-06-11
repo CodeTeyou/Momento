@@ -28,30 +28,6 @@ function createSection(parentElement) {
   firstItem.contentEditable = true;
 
   sectionContent.appendChild(firstItem);
-
-  sectionContent.addEventListener("keydown", (keyPressed) => {
-    const currentItem = event.target
-
-    if (keyPressed.key === "Enter") {
-      keyPressed.preventDefault();
-      const newListItem = document.createElement("li");
-      newListItem.contentEditable = true;
-      sectionContent.appendChild(newListItem);
-      newListItem.focus()
-    }
-
-    if (keyPressed.key === "Backspace") {
-      if (currentItem.textContent.trim() == "") {
-        keyPressed.preventDefault();
-        let previous = currentItem.previousElementSibling;
-
-        if (previous) {
-          currentItem.remove();
-          previous.focus()
-        }
-      }
-    }
-  });
 }
 
 addButton.addEventListener("click", () => {

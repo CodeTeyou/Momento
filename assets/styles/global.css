@@ -15,7 +15,15 @@
 
   /* Fonts */
   --fontmid: 20px;
-  --fontlrg: 32px;
+  --fontlrg: 40px;
   --fontdisplay: 40px;
   --fontsize: 16px;
+}
+
+*:focus {
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
 }

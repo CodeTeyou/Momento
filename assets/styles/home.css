@@ -24,6 +24,7 @@
 
 .homeprompt img {
   margin: var(--spacing);
+  width: 96px;
 }
 
 .select {
