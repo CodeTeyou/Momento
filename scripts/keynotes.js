@@ -1,24 +1,27 @@
-// Rewrite Input Logic
-
 let noteOptions = document.getElementById("savednotes");
 let noteNameInput = document.getElementById("notename");
 let save = document.getElementById("save");
 let keyNote = document.getElementById("keynotes");
 
- let savedName;
+let currentItem = null;
 
 // Crash Result
 
 window.addEventListener("load", () => {
   let savedContent = localStorage.getItem("lastNote");
-  savedName = localStorage.getItem("lastName");
+  let savedName = localStorage.getItem("lastName");
+
+  if (!savedContent || !savedName) {
+    return;
+  }
+
   keyNote.value = savedContent;
   noteNameInput.value = savedName;
 });
 
 window.addEventListener("beforeunload", () => {
   localStorage.setItem("lastNote", keyNote.value);
-  localStorage.setItem("lastName",noteNameInput.value);
+  localStorage.setItem("lastName", noteNameInput.value);
 });
 
 // IndexedDB
@@ -43,22 +46,21 @@ datarequest.onsuccess = (event) => {
   const list = store.getAll();
 
   list.onsuccess = () => {
-    if (list.result.length < 1) {
-      noteOptions.style.display = "none";
-      return;
-    } else {
+    if (list.result.length > 0) {
       for (let i = 0; i < list.result.length; i++) {
-        let option = new Option(list.result[i].name, list.result[i].id)
-        noteOptions.appendChild(option)
-        if (list.result[i].name == savedName) {noteOptions.value = option.value;}
+        let option = new Option(list.result[i].name, list.result[i].name);
+        option.dataset.id = list.result[i].id;
+        noteOptions.appendChild(option);
       }
     }
-  }
+  };
 };
 
 datarequest.onerror = (event) => {
   console.error(event.target.error);
 };
+
+// Saving
 
 save.addEventListener("click", () => {
   const transaction = database.transaction(["notesList"], "readwrite");
@@ -70,41 +72,53 @@ save.addEventListener("click", () => {
   const noteInsert = keyNote.value;
 
   getSaved.onsuccess = () => {
-    const previousId = getSaved.result.find((saved) => saved.name === nameInsert);
+    const previousId = getSaved.result.find(
+      (saved) => saved.name === nameInsert,
+    );
 
-    if (nameInsert == "") {
-        console.warn("EMPTY")
-        return;}
-
-    if (previousId) {
-        previousId.notes = noteInsert;
-        store.put(previousId);
-    } else {
-        const addRequest = store.add({
-          name: nameInsert,
-          notes: noteInsert
-        });
-        addRequest.onsuccess = () => {
-        const newOption = new Option(nameInsert, addRequest.result);
-        noteOptions.appendChild(newOption);
-        noteOptions.value = newOption.value;
-        noteOptions.style.display = "inline";
-        }
+    if (nameInsert.trim() == "") {
+      console.warn("EMPTY");
+      return;
     }
 
+    if (previousId) {
+      previousId.notes = noteInsert;
+      store.put(previousId);
+    } else {
+      const addRequest = store.add({
+        name: nameInsert,
+        notes: noteInsert,
+      });
+      addRequest.onsuccess = () => {
+        const newOption = new Option(nameInsert, nameInsert);
+        newOption.dataset.id = addRequest.result;
+        noteOptions.appendChild(newOption);
+      };
+    }
   };
 });
 
-noteOptions.onchange = () => {
+noteNameInput.addEventListener("input", () => {
+  const name = noteNameInput.value;
+
   const transaction = database.transaction(["notesList"], "readonly");
   const store = transaction.objectStore("notesList");
-  const newValue = Number(noteOptions.value);
+  const request = store.getAll();
 
-  const getSaved = store.get(Number(newValue));
+  request.onsuccess = () => {
+    const match = [...noteOptions.children].find(
+      (child) => child.value === noteNameInput.value.trim(),
+    );
+    if (!match) {
+      keyNote.value = "+ New";
+      return;
+    }
+    const note = request.result.find(
+      (item) => item.id === Number(match.dataset.id),
+    );
 
-  getSaved.onsuccess = () => {
-    const getNote = getSaved.result;
-    noteNameInput.value = getNote.name;
-    keyNote.value = getNote.notes;
-  }
-}
+    console.log(match, note);
+    if (!note) return;
+    keyNote.value = note.notes;
+  };
+});

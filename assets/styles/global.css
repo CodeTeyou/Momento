@@ -8,11 +8,11 @@
   --trans: all 0.2s ease-in-out;
 
   /* Colors */
-  --clr: white;
-  --fontclr: #000;
-  --theme: pink;
-  --studyclr: black;
-  --studyfontclr: white;
+  --clr: #EFEFEF;
+  --fontclr: #272727;
+  --theme: #F09B6D;
+  --studyclr: #272727;
+  --studyfontclr: #efefef;
   --urgent: red;
 
   /* Fonts */
