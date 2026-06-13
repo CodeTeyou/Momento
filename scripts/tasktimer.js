@@ -22,6 +22,8 @@ let pastTime;
 let timerCount;
 let timerOn = false;
 
+let saveGoal = null;  
+
 // Continue Past Timer
 
 window.addEventListener("load", () => {
@@ -36,11 +38,9 @@ window.addEventListener("load", () => {
 
   if (previousTime) {
     if (previousGoal || previousGoal == "") {
-      goalInput.style.display = "block";
       goal.innerText = "Goal: ";
     } else if (!previousGoal) {
-      goalInput.style.display = "none";
-      goal.innerText = previousGoal;
+      goal.innerText = null;
     }
 
     timerOn = true;
@@ -64,9 +64,9 @@ window.addEventListener("load", () => {
     startButton.style.display = "inline";
     startButton.innerText = "Pause";
 
-    pastTime = Number(timerInput.value);
+    pastTime = Number(timerInput.value) * 60;
     timerInput.style.display = "none";
-
+    pomodoroToggle = pomodoroMode;
     startTimer();
   }
 });
@@ -161,12 +161,15 @@ function startTimer() {
       if (pomodoroToggle === true) {
         pomodoroToggle = "break";
         goal.innerText = "Break!";
-        time = pastTime * 60 * 0.2;
+        time = pastTime * 0.2;
         startSound.play();
         startTimer();
       } else if (pomodoroToggle === "break") {
-        time = pastTime
-        startTimer()
+        goal.innerText = localStorage.getItem("goal");
+        time = pastTime;
+        startTimer();
+        startSound.play()
+        pomodoroToggle = false;
       } else {
         startButton.innerText = "Start";
         startButton.style.display = "none";
@@ -201,7 +204,7 @@ startButton.addEventListener("click", () => {
     spinnerContainer.style.display = "none";
     stopButton.style.display = "none";
     startButton.innerText = "Pause";
-    pastTime = Number(timerInput.value);
+    pastTime = Number(timerInput.value) * 60;
     timerInput.style.display = "none";
 
     if (!time) {
@@ -210,7 +213,7 @@ startButton.addEventListener("click", () => {
 
       startSound.play();
 
-      if (!goalInput.value == "") {
+      if (goalInput.value !== "") {
         goalInput.style.display = "none";
         goal.innerText = goalInput.value;
         localStorage.setItem("goal", goalInput.value);
@@ -257,5 +260,6 @@ stopButton.addEventListener("click", () => {
   clearInterval(timerCount);
   localStorage.removeItem("taskTime");
   localStorage.removeItem("goal");
+  localStorage.removeItem("pomodoro");
   timerCount = null;
 });
