@@ -15,7 +15,7 @@ Resources:
 (ASCII Art)
 https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Momento&x=none&v=4&h=4&w=80&we=false
 
-Fonts:
+(Fonts)
 https://fonts.google.com/icons?selected=Material+Symbols+Outlined:delete:FILL@0;wght@400;GRAD@0;opsz@24&icon.size=24&icon.color=%23e3e3e3&icon.platform=web
 
 (Audios)
