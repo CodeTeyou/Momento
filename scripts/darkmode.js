@@ -2,15 +2,21 @@ let preference;
 
 window.addEventListener("load", () => {
     preference = localStorage.getItem("lightPreference");
-    if (!preference || preference === false) {
+    if (preference === null) {
+        preference = false;
+    } else {
+        preference = JSON.parse(preference);
+    }
+
+    if (preference) {
         flipValue("clr", "#EFEFEF")
         flipValue("fontclr", "#272727")
-        preference = true;
     } else {
         flipValue("clr", "#272727")
         flipValue("fontclr", "#EFEFEF")
-        preference = false;
     }
+
+    console.log(preference);
 })
 
 const toggleButton = document.getElementById("modeToggle")
@@ -23,7 +29,7 @@ function flipValue(object, assignedValue) {
 }
 
 toggleButton.addEventListener("click", () => {
-    if (!preference || preference === false) {
+    if (!preference) {
         flipValue("clr", "#EFEFEF")
         flipValue("fontclr", "#272727")
         preference = true;
@@ -33,4 +39,5 @@ toggleButton.addEventListener("click", () => {
         preference = false;
     }
     localStorage.setItem("lightPreference", preference)
+    console.log(preference);
 })
