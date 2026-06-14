@@ -16,6 +16,7 @@
   --fontlrg: 40px;
   --fontdisplay: 40px;
   --fontsize: 16px;
+  --fontsmall: 8px;
 }
 
 *:focus {
@@ -30,7 +31,7 @@ button:hover {
   transition: var(--trans);
 }
 
-body::after {
+body::before {
   background-color: var(--theme);
   position: fixed;
   z-index: -1;
@@ -42,15 +43,24 @@ body::after {
   top: 2vh;
   left: 0;
 
-clip-path: polygon(66% 75%, 93% 47%, 0 14%, 69% 31%, 100% 99%, 45% 30%, 14% 99%, 0 85%, 8% 50%);
+  clip-path: polygon(
+    80% 75%,
+    93% 47%,
+    20% 14%,
+    69% 31%,
+    100% 79%,
+    45% 30%,
+    14% 80%,
+    0 85%,
+    8% 50%
+  );
 }
 
 main {
-  margin-top: 1px;
+  margin-top: 8vh + 1px;
   backdrop-filter: blur(150px);
-  -webkit-backdrop-filter: blur(150px);
-
-  height: 100vh;
+  -webkit-backdrop-filter: blur(50px);
+  width: 100vw;
 }
 
 body {

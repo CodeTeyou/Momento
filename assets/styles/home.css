@@ -35,6 +35,7 @@
   align-items: center;
 
   width: 40vw;
+  height: 48px;
 }
 
 .select a {
@@ -46,9 +47,11 @@
   border-radius: 32px;
   padding: 8px 16px;
 
-  transition: var(--trans);
+  backdrop-filter: blur(150px);
+  -webkit-backdrop-filter: blur(150px);
 }
 
 .select a:hover {
-  background-color: var(--theme);
+  background-color: rgba(256, 256, 256, 0.2);
+  font-size: var(--fontmid);
 }
