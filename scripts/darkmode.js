@@ -13,10 +13,6 @@ window.addEventListener("load", () => {
     }
 })
 
-window.addEventListener("beforeunload", () => {
-    localStorage.setItem("lightPreference", preference)
-})
-
 const toggleButton = document.getElementById("modeToggle")
 const root = document.querySelector(":root");
 let styled = getComputedStyle(root);
@@ -36,4 +32,5 @@ toggleButton.addEventListener("click", () => {
         flipValue("fontclr", "#EFEFEF")
         preference = false;
     }
+    localStorage.setItem("lightPreference", preference)
 })
