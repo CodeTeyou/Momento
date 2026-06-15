@@ -20,25 +20,13 @@ function flipValue(object, assignedValue) {
   root.style.setProperty(changeObject, String(assignedValue));
 }
 
-function styleColor() {
-  if (!preference) {
-    flipValue("clr", "#EFEFEF");
-    flipValue("fontclr", "#272727");
-    flipSpinners(preference);
-    flipImage("#openToggle img", preference);
-  } else {
-    flipValue("clr", "#272727");
-    flipValue("fontclr", "#EFEFEF");
-    flipSpinners(preference);
-    flipImage("#openToggle img", preference);
-  }
-}
-
 toggleButton.addEventListener("click", () => {
   preference = !preference;
   styleColor();
   localStorage.setItem("lightPreference", JSON.stringify(preference));
 });
+
+// Functions
 
 function flipSpinners(pref) {
   const spinnerUp = document.getElementById("spinnerup");
@@ -68,10 +56,42 @@ function flipImage(imageToFlip, pref) {
     if (pref) {
       imageTo.style.filter =
         "brightness(0) invert(1) drop-shadow(0 0 0 var(--fontclr))";
-      imageTo.style.color = "var(--fontclr);";
+      imageTo.style.color = "var(--fontclr)";
     } else {
       imageTo.style.filter = "";
       imageTo.style.color = "";
     }
+  }
+}
+
+function colorClass(onOff, classToColor) {
+  let classColor = document.getElementsByClassName(classToColor);
+  if (classColor) {
+    for (i = 0; i < classColor.length; i++) {
+      if (onOff) {
+        classColor[i].style.filter =
+          "brightness(0) invert(1) drop-shadow(0 0 0 var(--fontclr))";
+        classColor[i].style.color = "var(--fontclr)";
+      } else {
+        classColor[i].style.filter = "";
+        classColor[i].style.color = "";
+      }
+    }
+  }
+}
+
+function styleColor() {
+  if (!preference) {
+    flipValue("clr", "#EFEFEF");
+    flipValue("fontclr", "#272727");
+    flipSpinners(preference);
+    flipImage("#openToggle img", preference);
+    colorClass(preference, "editButton");
+  } else {
+    flipValue("clr", "#272727");
+    flipValue("fontclr", "#EFEFEF");
+    flipSpinners(preference);
+    flipImage("#openToggle img", preference);
+    colorClass(preference, "editButton");
   }
 }

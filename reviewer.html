@@ -31,22 +31,80 @@
       </div>
     </nav>
     <main class="reviewerPage">
-      <div id="modeToggle"><img src="./assets/images/LightDarkToggle.png" alt=""></div>
-      <aside class="noteRender">
+      <div id="modeToggle">
+        <img src="./assets/images/LightDarkToggle.png" alt="" />
+      </div>
+      <!-- Add Render Title Here -->
+      <div class="noteRender">
         <nav id="noteSelect"></nav>
         <textarea id="noteBox" readonly></textarea>
-      </aside>
-      <!-- Add Editor Functionality -->
+      </div>
       <div class="textEditor">
         <div class="editorSettings">
-          <button id="addSection">+</button>
+          <button id="addSection">
+            <img
+              src="./assets/images/icons/plus.png"
+              alt="+"
+              class="editButton"
+            />
+          </button>
+          <button id="addPage">
+            <img
+              src="./assets/images/icons/add-page.png"
+              alt=""
+              class="editButton"
+            />
+          </button>
+          <button id="boldText">
+            <img
+              src="./assets/images/icons/bold.png"
+              alt=""
+              class="editButton"
+            />
+          </button>
+          <button id="underlineText">
+            <img
+              src="./assets/images/icons/underline.png"
+              alt=""
+              class="editButton"
+            />
+          </button>
+          <button id="italicText">
+            <img
+              src="./assets/images/icons/italic.png"
+              alt=""
+              class="editButton"
+            />
+          </button>
+          <button id="left">
+            <img
+              src="./assets/images/icons/left.png"
+              alt=""
+              class="editButton"
+            />
+          </button>
+          <button id="center">
+            <img
+              src="./assets/images/icons/center.png"
+              alt=""
+              class="editButton"
+            />
+          </button>
+          <button id="right">
+            <img
+              src="./assets/images/icons/right.png"
+              alt=""
+              class="editButton"
+            />
+          </button>
         </div>
+
         <div id="documentWriter"></div>
       </div>
     </main>
   </body>
 
   <script src="./scripts/textEditor.js"></script>
-    <script src="./scripts/noteRender.js"></script>
-    <script src="./scripts/darkmode.js"></script>
+  <script src="./scripts/noteRender.js"></script>
+  <script src="./scripts/darkmode.js"></script>
 </html>
