@@ -31,7 +31,7 @@
       <div id="modeToggle">
         <img src="./assets/images/LightDarkToggle.png" alt="" />
       </div>
-      <div class="timerbox">
+      <div class="timerbox" id="timerBox">
         <div class="timerholder">
           <div id="spinners">
             <button id="spinnerup">
@@ -51,23 +51,32 @@
       </div>
 
       <!-- Create Open Button Here -->
-      <div id="openToggle"></div>
+      <button id="openToggle" data-toggled="true">
+        <img src="./assets/images/arrow-round.png" alt=">" />
+      </button>
 
-      <div class="notes">
-          <textarea
-            id="keynotes"
-            placeholder="Type Key Notes Here..."
-          ></textarea>
+      <div class="notes" id="noteBox">
+        <label for="keynotes">Key Notes</label>
+        <textarea
+          id="keynotes"
+          name="keynotes"
+          placeholder="Type Key Notes Here..."
+        ></textarea>
         <div class="savebox">
           <!-- Add A "Duplicate Or Overwrite Prompt" -->
           <div class="savename">
             <label for="nameInput">Name</label>
-            <input type="text" id="notename" name="nameInput" maxlength="20" list="savednotes" />
+            <input
+              type="text"
+              id="notename"
+              name="nameInput"
+              maxlength="25"
+              list="savednotes"
+            />
             <datalist id="savednotes"></datalist>
           </div>
           <button id="save">Save</button>
         </div>
-        
       </div>
     </main>
   </body>

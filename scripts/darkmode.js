@@ -21,21 +21,22 @@ function flipValue(object, assignedValue) {
 }
 
 function styleColor() {
-    if (!preference) {
+  if (!preference) {
     flipValue("clr", "#EFEFEF");
     flipValue("fontclr", "#272727");
     flipSpinners(preference);
+    flipImage("#openToggle img", preference);
   } else {
     flipValue("clr", "#272727");
     flipValue("fontclr", "#EFEFEF");
     flipSpinners(preference);
+    flipImage("#openToggle img", preference);
   }
 }
 
-
 toggleButton.addEventListener("click", () => {
   preference = !preference;
-  styleColor()
+  styleColor();
   localStorage.setItem("lightPreference", JSON.stringify(preference));
 });
 
@@ -44,10 +45,12 @@ function flipSpinners(pref) {
   const spinnerDown = document.getElementById("spinnerdown");
   if (spinnerUp && spinnerDown) {
     if (pref) {
-      spinnerUp.style.filter = "brightness(0) invert(1) drop-shadow(0 0 0 var(--fontclr))";
+      spinnerUp.style.filter =
+        "brightness(0) invert(1) drop-shadow(0 0 0 var(--fontclr))";
       spinnerUp.style.color = "var(--fontclr);";
 
-      spinnerDown.style.filter = "brightness(0) invert(1) drop-shadow(0 0 0 var(--fontclr))";
+      spinnerDown.style.filter =
+        "brightness(0) invert(1) drop-shadow(0 0 0 var(--fontclr))";
       spinnerDown.style.color = "var(--fontclr);";
     } else {
       spinnerUp.style.filter = "";
@@ -55,6 +58,20 @@ function flipSpinners(pref) {
 
       spinnerDown.style.filter = "";
       spinnerDown.style.color = "";
+    }
+  }
+}
+
+function flipImage(imageToFlip, pref) {
+  const imageTo = document.querySelector(`${imageToFlip}`);
+  if (imageTo) {
+    if (pref) {
+      imageTo.style.filter =
+        "brightness(0) invert(1) drop-shadow(0 0 0 var(--fontclr))";
+      imageTo.style.color = "var(--fontclr);";
+    } else {
+      imageTo.style.filter = "";
+      imageTo.style.color = "";
     }
   }
 }

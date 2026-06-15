@@ -167,3 +167,33 @@ saveButton.addEventListener("click", () => {
     localStorage.removeItem("lastName");
   };
 });
+
+// Button Press
+const openButton = document.getElementById("openToggle");
+const buttonImage = openButton.querySelector("img");
+const noteBox = document.getElementById("noteBox");
+
+openButton.addEventListener("click", (event) => {
+  let openToggle = openButton.dataset.toggled;
+  openToggle = JSON.parse(openToggle);
+
+  if (openToggle) {
+    // Close
+
+    buttonImage.style.rotate = "180deg";
+    noteBox.style.transform = "translate(110%, 0)";
+    openButton.style.transform = "translate(30vw, 0)";
+
+    openToggle = false;
+  } else {
+    // Open
+
+    buttonImage.style.rotate = "";
+    noteBox.style.transform = "";
+    openButton.style.transform = "";
+
+    openToggle = true;
+  }
+
+  openButton.dataset.toggled = openToggle;
+});
