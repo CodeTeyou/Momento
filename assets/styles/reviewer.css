@@ -16,11 +16,19 @@
 
   gap: var(--spacing);
   width: 100vw;
+  height: 100vh;
+}
+
+h1 {
+  color: var(--fontclr);
+  position: absolute;
+  top: -1rem;
+  left: 1rem;
 }
 
 .noteRender {
   display: flex;
-  height: 85vh;
+  height: 80vh;
 
   transform: translate(0, 5%);
 
@@ -32,7 +40,7 @@
 }
 
 #noteSelect {
-  background-color: pink;
+  background-color: var(--clr);
   display: flex;
   flex-direction: column;
   padding: var(--spacing);
@@ -48,6 +56,7 @@
 .noteOption {
   flex: 0 0 85%;
   text-align: left;
+  color: var(--fontclr);
 }
 
 .noteSelector button {
@@ -79,6 +88,7 @@
   width: 20vw;
   padding: var(--spacing);
   padding-bottom: 20vh;
+  border: none;
 }
 
 .textEditor {

@@ -11,16 +11,21 @@ let currentItem = null;
 window.addEventListener("load", () => {
   const savedContent = localStorage.getItem("lastNote");
   const savedName = localStorage.getItem("lastName");
+  const savedItem = localStorage.getItem("currentItem")
 
   if (savedContent === null || savedName === null) return;
 
   keyNote.value = savedContent;
   noteNameInput.value = savedName;
+  if (savedItem) {
+    currentItem = savedItem;
+  }
 });
 
 window.addEventListener("beforeunload", () => {
   localStorage.setItem("lastNote", keyNote.value);
   localStorage.setItem("lastName", noteNameInput.value);
+  localStorage.setItem("currentItem", currentItem)
 });
 
 // IndexedDB

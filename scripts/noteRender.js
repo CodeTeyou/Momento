@@ -51,6 +51,8 @@ function loadButtons(store) {
     let warnMessage = document.createElement("span");
     warnMessage.style.color = "var(--urgent)";
     warnMessage.textContent = "You Have No Notes, Study To Make Some!";
+    warnMessage.style.fontWeight = "700";
+    warnMessage.style.padding = "var(--spacing)";
     noteSelector.appendChild(warnMessage);
     noteBox.style.display = "none";
     return;

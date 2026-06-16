@@ -97,10 +97,9 @@ input[type="number"] {
 }
 
 #spinners button img {
-  mask: url("../../assets/images/arrow.png") no-repeat center;
-  -webkit-mask: url("../../assets/images/arrow.png") no-repeat center;
-  width: 40px;
-  height: 32px;
+  mask: url("../../assets/images/arrow.svg") no-repeat center;
+  -webkit-mask: url("../../assets/images/arrow.svg") no-repeat center;
+  width: 48px;
 }
 
 #spinnerdown {
@@ -157,10 +156,10 @@ input[type="number"] {
 
 .savebox button {
   margin-top: var(--spacing);
-  border: none;
   padding: var(--spacing);
   border-radius: 32px;
-  border: 2px solid var(--fontclr);
+  border: 2px solid #272727;
+  color: #272727;
   outline: none;
 
   font-family: "Inter";
@@ -181,12 +180,13 @@ input[type="number"] {
 .savename {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .savename input {
   border: none;
   padding: var(--spacing);
-  padding-left: 30px;
+  padding-left: 25px;
   border-radius: 8px;
   border: 1px solid var(--fontclr);
 }
@@ -214,4 +214,21 @@ label {
 
 #openToggle img {
   height: 32px;
+}
+
+.savename::before {
+  pointer-events: none;
+  position: absolute;
+
+  content: "";
+  background: url(../../assets/images/arrow-round.svg) no-repeat center;
+  background-size: contain;
+
+  width: 10px;
+  height: 20px;
+
+  rotate: 90deg;
+
+  top: 40%;
+  margin: var(--spacing) 0 0 var(--spacing);
 }
