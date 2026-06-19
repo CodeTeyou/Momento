@@ -21,6 +21,7 @@
 
 h1 {
   color: var(--fontclr);
+  font-size: 3vw;
   position: absolute;
   top: -1rem;
   left: 1rem;
@@ -28,22 +29,26 @@ h1 {
 
 .noteRender {
   display: flex;
-  height: 80vh;
+  height: 75vh;
 
-  transform: translate(0, 5%);
+  transform: translate(8px, 10%);
 
   border: 2px solid var(--fontclr);
   border-radius: 32px;
 
   overflow: hidden;
-  margin: var(--spacing);
+
+  flex: 0 0 35%;
+
+  filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.5));
 }
 
 #noteSelect {
-  background-color: var(--clr);
+  background-color: var(--fontclr);
+  color: var(--clr);
   display: flex;
   flex-direction: column;
-  padding: var(--spacing);
+  padding: 16px;
   width: 16vw;
 }
 
@@ -56,7 +61,7 @@ h1 {
 .noteOption {
   flex: 0 0 85%;
   text-align: left;
-  color: var(--fontclr);
+  color: var(--clr);
 }
 
 .noteSelector button {
@@ -84,27 +89,24 @@ h1 {
 }
 
 #noteBox {
+  background-color: var(--clr);
+  color: var(--fontclr);
   resize: none;
   width: 20vw;
   padding: var(--spacing);
   padding-bottom: 20vh;
+  margin: 0;
   border: none;
 }
 
 .textEditor {
   flex: 0 0 50%;
-}
-
-.documentWriter {
-  height: 100vh;
-  display: flex;
-  flex-wrap: wrap;
+  padding: var(--spacing);
 }
 
 .editorSettings {
   background: var(--clr);
-  padding: var(--spacing);
-  margin-top: var(--spacing);
+  transform: translate(0, 7vh);
 
   display: flex;
   flex-direction: row;
@@ -112,21 +114,57 @@ h1 {
 
   border: 2px solid var(--fontclr);
   border-radius: 16px;
+  filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.5));
 }
 
 .editorSettings button {
+  flex: 10% 10% 10%;
   outline: none;
   border: none;
 
-  align-content: center;
-  justify-content: center;
+  padding: var(--spacing);
 
-  width: 48px;
-  height: 64px;
+  align-items: center;
+  justify-content: center;
 
   background: transparent;
 }
 
 .editButton {
+  pointer-events: none;
   width: 100%;
+}
+
+.editorSettings button:hover .editButton{
+  width: 125%;
+}
+
+/* Pages */
+
+#documentWriter {
+  display: flex;
+
+  margin-top: 8vh;
+  padding: 16px;
+  gap: var(--spacing);
+
+  height: max-content;
+  width: 60vw;
+
+  overflow-x: auto;
+  scrollbar-width: 8px;
+  -ms-overflow-style: 8px;
+}
+
+#documentWriter::-webkit-scrollbar {
+  width: 8px;
+}
+
+.documentPage {
+  background-color: var(--clr);
+  color: var(--fontclr);
+  border: 1px solid var(--fontclr);
+  height: 60vh;
+  aspect-ratio: 216 / 279;
+  filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.5));
 }

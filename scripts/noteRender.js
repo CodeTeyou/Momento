@@ -53,8 +53,8 @@ function loadButtons(store) {
     warnMessage.textContent = "You Have No Notes, Study To Make Some!";
     warnMessage.style.fontWeight = "700";
     warnMessage.style.padding = "var(--spacing)";
+    noteBox.value = null;
     noteSelector.appendChild(warnMessage);
-    noteBox.style.display = "none";
     return;
   }
 

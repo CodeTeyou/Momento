@@ -155,7 +155,6 @@ input[type="number"] {
 }
 
 .savebox button {
-  margin-top: var(--spacing);
   padding: var(--spacing);
   border-radius: 32px;
   border: 2px solid #272727;
