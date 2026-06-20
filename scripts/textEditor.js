@@ -10,9 +10,10 @@ const editorSettings = getElement("editorSettings");
 
 let pageList = [];
 
-const page = {
-  element: null,
-  create(pageId, parentElement) {
+class Page  {
+  element;
+
+  constructor(pageId, parentElement) {
     const newPage = document.createElement("section");
     newPage.id = pageId;
     newPage.className = "documentPage";
@@ -20,8 +21,13 @@ const page = {
 
     this.element = newPage;
     pageList.push(newPage);
-  },
-};
+  }
+
+  stands() {
+    const tempCheck = this.element ? this.element : null;
+    return tempCheck;
+  }
+}
 
 // Function List
 const editorActions = {
