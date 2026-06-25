@@ -135,7 +135,7 @@
   width: 100%;
 }
 
-.editorSettings button:hover .editButton{
+.editorSettings button:hover .editButton {
   width: 125%;
 }
 
@@ -152,7 +152,7 @@
   width: 60vw;
 
   overflow-x: auto;
-  scrollbar-width: 8px;
+  scrollbar-width: thin;
   -ms-overflow-style: 8px;
 }
 
@@ -164,13 +164,39 @@
   background-color: var(--clr);
   color: var(--fontclr);
   border: 1px solid var(--fontclr);
-  height: 60vh;
-  max-width: 100%;
+  width: 45vh;
   aspect-ratio: 216 / 279;
   filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.5));
   padding: 8px;
 
-  display: flex;
+  flex-shrink: 0;
+  display: grid;
+  grid-template-rows: 10% 85% 5%;
+
   overflow: hidden;
-  flex-wrap: wrap;
+}
+
+/* Page Inner Content */
+
+.pageHeader {
+  background-color: rebeccapurple;
+  margin: 0;
+  padding: var(--spacing);
+  text-align: center;
+}
+
+.pageFooter {
+  background-color: blue;
+  padding: var(--spacing);
+  text-align: end;
+}
+
+.pageContent {
+  font-family: "Inter";
+  background-color: pink;
+  padding: var(--spacing);
+}
+
+ul::-moz-list-bullet {
+  content: "-";
 }
