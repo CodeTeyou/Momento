@@ -1,3 +1,5 @@
+import createPopUp from "../modules/notification.js";
+
 const noteOptions = document.getElementById("savednotes");
 const noteNameInput = document.getElementById("notename");
 const saveButton = document.getElementById("save");
@@ -151,6 +153,8 @@ saveButton.addEventListener("click", () => {
 
         localStorage.removeItem("lastNote");
         localStorage.removeItem("lastName");
+
+        createPopUp("Saved Successfully!", 2, "green", true)
       };
     };
 
@@ -170,6 +174,8 @@ saveButton.addEventListener("click", () => {
 
     localStorage.removeItem("lastNote");
     localStorage.removeItem("lastName");
+
+    createPopUp("New Note Created!", 2, "green", true)
   };
 });
 
